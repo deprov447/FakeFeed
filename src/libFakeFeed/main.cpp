@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
   QQmlApplicationEngine engine;
 
-  ffmpeg demo;
+  FFMPEG demo;
   qmlRegisterSingletonInstance<ffmpeg>("org.deprov447.example",1,0,"FFMPEG",&demo);
 
   auto temp = new KLocalizedContext( &engine );

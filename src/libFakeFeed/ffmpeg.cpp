@@ -8,7 +8,7 @@
 #include "QObject"
 
 void
-ffmpeg::stream ( QString textfile, QString device )
+FFMPEG::stream ( QString textfile, QString device )
 {
   QObject *parent;
   QString program = "ffmpeg";
@@ -28,7 +28,7 @@ ffmpeg::stream ( QString textfile, QString device )
 }
 
 void
-ffmpeg::hello ()
+FFMPEG::hello ()
 {
   std::cout << "hello";
 }
