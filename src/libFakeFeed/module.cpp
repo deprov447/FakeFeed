@@ -1,33 +1,28 @@
-#include "QDebug"
-#include "QString"
-#include "QStringList"
-#include "QObject"
-#include "QProcess"
+#include "module.h"
 
 bool
 Module::findOriginalCam ()
 {
-
+    return true;
 };
 
 bool
 Module::manageDevice ( QString deviceName, bool toRemove )
 {
-  QObject *parentl;
   QString program = "modprobe"; //permission
 
   QStringList arguments;
   if( toRemove )
   {
     arguments << "-r";
-    QDebug() << "toRemove is set to" << toRemove;
+    qDebug() << "toRemove is set to" << toRemove;
   }
   arguments << deviceName;
-  QDebug() << "deviceName is set to" << deviceName;
+  qDebug() << "deviceName is set to" << deviceName << deviceName.length();
 
-  QProcess *callManageDevice = new QProcess( parent );
+  QProcess *callManageDevice = new QProcess(  );
   callManageDevice->start( program, arguments );
-  QDebug() << "callManageDevice process called";
+  qDebug() << "callManageDevice process done";
 
   return true; //toDo
 };

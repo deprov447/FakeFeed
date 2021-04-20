@@ -1,5 +1,10 @@
+#pragma once
+
 #include "QString"
 #include "QObject"
+#include "QDebug"
+#include "QProcess"
+#include <iostream>
 
 class FFMPEG : public QObject {
 
