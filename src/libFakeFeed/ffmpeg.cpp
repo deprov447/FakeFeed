@@ -1,17 +1,17 @@
 #include "ffmpeg.h"
 
 void
-FFMPEG::stream ( QString textfile, QString device )
+FFMPEG::stream ( )
 {
   QString program = "ffmpeg";
   
-  qDebug() << "Reading from" << textfile;
+  qDebug() << "Reading from" << m_tFileLocation;
 
   QStringList arguments;
-  arguments << "-re" << "-f" << "concat" << "i" << textfile;
-  arguments << "-f" << "v4l2" << device;
+  arguments << "-re" << "-f" << "concat" << "i" << m_tFileLocation;
+  arguments << "-f" << "v4l2" << m_loopbackDevice;
 
-  qDebug() << "Writing to" << device;
+  qDebug() << "Writing to" << m_loopbackDevice;
 
   QProcess *callStream = new QProcess( );
   callStream->start( program, arguments );
@@ -20,7 +20,14 @@ FFMPEG::stream ( QString textfile, QString device )
 }
 
 void
-FFMPEG::hello ()
+FFMPEG::textFileGenerator ( QString tfileAddress, int loopMax )
 {
-  std::cout << "hello";
+    m_tFileLocation = tfileAddress;
+    qDebug() << "textfileGenerator called with arguments" << tfileAddress << loopMax;
+    QFile textFile ( tfileAddress );
+    QTextStream out( &textFile );
+    while ( loopMax-- )
+    {
+        out << m_vFileLocation << "\n";
+    }
 }

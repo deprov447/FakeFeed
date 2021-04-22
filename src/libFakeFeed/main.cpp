@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
 {
   QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QGuiApplication app(argc, argv);
-  KLocalizedString::setApplicationDomain("helloworld");
+  KLocalizedString::setApplicationDomain("fakefeed");
   QCoreApplication::setOrganizationName("deprov447");
   QCoreApplication::setOrganizationDomain("deprov447.netlify.app");
-  QCoreApplication::setApplicationName("Hello World");
+  QCoreApplication::setApplicationName("Fake Feed");
 
   QCommandLineParser parser;
   QCommandLineOption testOption ( QStringList() << QStringLiteral( "t" ) << QStringLiteral( "test" )
@@ -35,19 +35,18 @@ int main(int argc, char *argv[])
       Test t;
       t.initiateTest();
       return 0;
-  }
+   }
 
-  QQmlApplicationEngine engine;
-  qDebug() << "QML engine instantiated";
+  qmlRegisterType<FFMPEG>("com.fakefeed.ffmpeg", 1, 0, "FFMPEG");
+  qmlRegisterType<Module>("com.fakefeed.module", 1, 0, "MODULE");
 
+  QQmlEngine engine;
   auto temp = new KLocalizedContext( &engine );
   engine.rootContext()->setContextObject( temp );
-  engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-  if(engine.rootObjects().isEmpty())
-  {
-    return -1;
-  }
+  QQmlComponent component(&engine,
+          QUrl("qrc:/main.qml"));
+  component.create();
 
   return app.exec();
 }

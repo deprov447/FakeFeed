@@ -13,7 +13,7 @@
 class Test {
     public:
         void initiateTest ();
-        void testManageDevice ( Module m );
+        void testManageDevice ( Module& m );
         void testFindOriginalCam ();
         void testStream ();
 };

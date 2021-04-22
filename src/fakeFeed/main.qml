@@ -2,11 +2,14 @@ import org.kde.kirigami 2.13 as Kirigami
 import QtQuick 2.9
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
-import org.deprov447.example 1.0
+import com.fakefeed.ffmpeg 1.0
+import com.fakefeed.module 1.0
 
 Kirigami.ApplicationWindow {
     id: root
     title : "Fake Feed"
+    width: 500
+    height: 500
 
     Drawer {
         id: drawer
@@ -17,20 +20,47 @@ Kirigami.ApplicationWindow {
         id: choicePage
     }
 
-    RowLayout {
+    FFMPEG {
+      id : ffmpeg
+    }
+
+    MODULE {
+       id: module
+    }
+
+    function getfileurl ( reqString )
+    {
+        ffmpeg.fileInput( reqString );
+    }
+
+    ColumnLayout {
+        anchors.centerIn: parent
         Button {
-            text: "Choose a video file"
-            onClicked: choicePage.open()
-        }
-        Button {
-            text: "Disable current Camera feed"
+            id : botton1
+            text: "Choose a file"
             onClicked: {
-                console.log(  FFMPEG.hello )
+                choicePage.open()
+                botton2.enabled = true
             }
         }
         Button {
+            id : botton2
+            enabled: false
+            text: "Disable current Camera feed"
+            onClicked: {
+                module.getOriginalCam( "uvcvideo" )
+                botton3.enabled = true
+            }
+        }
+        Button {
+            id : botton3
+            enabled: false
             text: "Start fake cam feed"
-//            onClicked: model.revert()
+            onClicked: {
+                module.manageDevice( "v4l2loopback" , false )
+                ffmpeg.textFileGenerator( "~/vtextfile.txt" , 10 )
+                ffmpeg.stream()
+            }
         }
     }
 }

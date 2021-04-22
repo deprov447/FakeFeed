@@ -10,7 +10,7 @@ Test::initiateTest ()
 }
 
 void
-Test::testManageDevice ( Module m )
+Test::testManageDevice ( Module& m )
 {
     m.manageDevice( "uvcvideo", true );
     qDebug() << "UVCvideo module removed";

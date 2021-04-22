@@ -4,15 +4,22 @@
 #include "QObject"
 #include "QDebug"
 #include "QProcess"
-#include <iostream>
+#include "QFile"
 
 class FFMPEG : public QObject {
 
-  Q_OBJECT
-//  Q_PROPERTY( READ hello )
+    Q_OBJECT
 
   public:
-    explicit FFMPEG (QObject* parent = 0) : QObject(parent) {};
-    void hello ();
-    void stream ( QString textfile, QString device );
+    explicit FFMPEG (QObject* parent = 0) : QObject(parent) {}
+
+    Q_INVOKABLE void textFileGenerator ( QString tfileAddress, int loopMax );
+    Q_INVOKABLE void stream ( );
+    Q_INVOKABLE void fileInput ( QString fileAddress ) { m_vFileLocation = fileAddress; };
+
+  private:
+    QString m_vFileLocation ;
+    QString m_tFileLocation = "~/vtextfile";
+    QString m_loopbackDevice = "v4l2loopback";
+
 };

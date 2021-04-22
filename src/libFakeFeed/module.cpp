@@ -1,8 +1,11 @@
 #include "module.h"
 
 bool
-Module::findOriginalCam ()
+Module::getOriginalCam ( QString webCamName )
 {
+    qDebug() << "getOriginal Cam called with argument" << webCamName;
+    m_OriginalCam = webCamName;
+    manageDevice( webCamName , true );      // this shouldn't live here
     return true;
 };
 
@@ -18,7 +21,7 @@ Module::manageDevice ( QString deviceName, bool toRemove )
     qDebug() << "toRemove is set to" << toRemove;
   }
   arguments << deviceName;
-  qDebug() << "deviceName is set to" << deviceName << deviceName.length();
+  qDebug() << "deviceName is set to" << deviceName;
 
   QProcess *callManageDevice = new QProcess(  );
   callManageDevice->start( program, arguments );

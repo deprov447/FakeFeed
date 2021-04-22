@@ -6,10 +6,17 @@
 #include "QObject"
 #include "QProcess"
 
-class Module {
+class Module : public QObject {
+
+    Q_OBJECT
+
   public :
-    bool findOriginalCam ();
-    bool manageDevice ( QString deviceName, bool toRemove );
+    explicit Module (QObject* parent = 0) : QObject(parent) {}
+
+    Q_INVOKABLE bool getOriginalCam ( QString webCamName );
+    Q_INVOKABLE bool manageDevice ( QString deviceName, bool toRemove );
+
   private :
-    QString m_OriginalCam;
+    QString m_OriginalCam = "uvcvideo" ;
+
 };
