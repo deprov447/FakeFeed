@@ -5,6 +5,7 @@
 #include "QStringList"
 #include "QObject"
 #include "QProcess"
+#include "globalStorage.h"
 
 class Module : public QObject {
 
@@ -15,6 +16,8 @@ class Module : public QObject {
 
     Q_INVOKABLE bool getOriginalCam ( QString webCamName );
     Q_INVOKABLE bool manageDevice ( QString deviceName, bool toRemove );
+    Q_INVOKABLE void setvDeviceName ( QString deviceName );
+    Q_INVOKABLE void setvDeviceID ( QString deviceID );
 
   private :
     QString m_OriginalCam = "uvcvideo" ;

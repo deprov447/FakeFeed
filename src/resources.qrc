@@ -3,5 +3,6 @@
         <file alias="main.qml">fakeFeed/main.qml</file>
         <file alias="Drawer.qml">fakeFeed/Drawer.qml</file>
         <file alias="ChoicePage.qml">fakeFeed/ChoicePage.qml</file>
+        <file alias="VDeviceSettingSheet.qml">fakeFeed/VDeviceSettingSheet.qml</file>
     </qresource>
 </RCC>

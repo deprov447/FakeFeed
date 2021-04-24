@@ -1,4 +1,5 @@
 #include "ffmpeg.h"
+#include "globalStorage.h"
 
 void
 FFMPEG::stream ( )
@@ -9,9 +10,9 @@ FFMPEG::stream ( )
 
   QStringList arguments;
   arguments << "-re" << "-i" << m_vFileLocation;
-  arguments << "-f" << "v4l2" << m_loopbackDevice;
+  arguments << "-f" << "v4l2" << "/dev/video" + GlobalStorage::vDeviceID ;
 
-  qDebug() << "Writing to" << m_loopbackDevice;
+  qDebug() << "Writing to" << GlobalStorage::vDeviceID;
 
   QProcess *callStream = new QProcess( );
   callStream->start( program, arguments );

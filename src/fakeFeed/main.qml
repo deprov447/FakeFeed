@@ -28,6 +28,10 @@ Kirigami.ApplicationWindow {
        id: module
     }
 
+    VDeviceSettingSheet {
+        id: vDeviceSettingSheet
+    }
+
     function getfileurl ( reqString )
     {
         ffmpeg.fileInput( reqString );
@@ -65,6 +69,12 @@ Kirigami.ApplicationWindow {
                 module.getOriginalCam( "uvcvideo" )
                 botton3.enabled = true
             }
+        }
+        Button {
+           text: "Advanced Settings"
+           onClicked: {
+                vDeviceSettingSheet.open()
+           }
         }
         Button {
             property var startMode : true;
