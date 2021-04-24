@@ -54,28 +54,39 @@ Kirigami.ApplicationWindow {
     }
 
     ColumnLayout {
-        anchors.centerIn: parent
+        anchors{
+            verticalCenter: parent.verticalCenter
+            horizontalCenter: parent.horizontalCenter
+        }
         Button {
             id : botton1
+            anchors.horizontalCenter: parent.horizontalCenter
             text: "Choose a file"
             onClicked: {
+                module.manageDevice( "v4l2loopback", true );
+                console.log ("Removed any stray virtual devices")
                 choicePage.open()
                 botton2.enabled = true
             }
         }
         Button {
             id : botton2
+            anchors.horizontalCenter: parent.horizontalCenter
             enabled: false
             text: "Disable current Camera feed"
             onClicked: {
                 module.getOriginalCam( "uvcvideo" )
-                botton3.enabled = true
                 console.log("uvcvideo module removed")
+                botton3.enabled = true
+                advanceSettingBtn.enabled = true
             }
         }
         Button {
-           text: "Advanced Settings"
-           onClicked: {
+            id : advanceSettingBtn
+            anchors.horizontalCenter: parent.horizontalCenter
+            enabled: false
+            text: "Advanced Settings"
+            onClicked: {
                 vDeviceSettingSheet.open()
                 console.log("Advanced Settings");
            }
@@ -83,6 +94,7 @@ Kirigami.ApplicationWindow {
         Button {
             property var startMode : true;
             id : botton3
+            anchors.horizontalCenter: parent.horizontalCenter
             enabled: false
             text : startMode ? "Start Cam feed" : "Stop Cam feed"
             onClicked: {
@@ -93,6 +105,7 @@ Kirigami.ApplicationWindow {
         }
         Button {
             id : botton4
+            anchors.horizontalCenter: parent.horizontalCenter
             enabled: false && botton4.startMode===true
             text: "Enable original cam feed"
             onClicked: {
