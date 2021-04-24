@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
   QQmlComponent component(&engine,
           QUrl("qrc:/main.qml"));
   component.create();
+  qDebug() << "QML engine started";
 
   return app.exec();
 }

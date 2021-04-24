@@ -11,6 +11,7 @@ FileDialog {
       folder: shortcuts.home
       onAccepted: {
           getfileurl( fileDialog.fileUrls )
+          console.log("video file chosen : " + fileDialog.fileUrls)
       }
       onRejected: {
           console.log("Canceled")

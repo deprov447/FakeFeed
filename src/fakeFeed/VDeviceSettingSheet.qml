@@ -21,7 +21,9 @@ Kirigami.OverlaySheet {
             text: "Apply"
             onClicked: {
                 module.setvDeviceName(customLoopbackDevicename.text)
+                console.log("vDeviceName set to " +customLoopbackDevicename.text)
                 module.setvDeviceID(customLoopbackDeviceID.text)
+                console.log("vDeviceID set to " +customLoopbackDeviceID.text)
                 vDeviceSettingSheet.close()
             }
         }

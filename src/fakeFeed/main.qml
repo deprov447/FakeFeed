@@ -43,11 +43,13 @@ Kirigami.ApplicationWindow {
         if (start)
         {
             ffmpeg.textFileGenerator( "vtextfile.txt" , 100000 )
+            console.log( "textFileGenerator called" )
             ffmpeg.stream()
+            console.log( "Stream started" )
         }
         else
         {
-                console.log("halleluah")
+                console.log("ToDo : rm textfile and stop stream")
         }
     }
 
@@ -68,12 +70,14 @@ Kirigami.ApplicationWindow {
             onClicked: {
                 module.getOriginalCam( "uvcvideo" )
                 botton3.enabled = true
+                console.log("uvcvideo module removed")
             }
         }
         Button {
            text: "Advanced Settings"
            onClicked: {
                 vDeviceSettingSheet.open()
+                console.log("Advanced Settings");
            }
         }
         Button {
@@ -93,7 +97,9 @@ Kirigami.ApplicationWindow {
             text: "Enable original cam feed"
             onClicked: {
                 module.manageDevice( "v4l2loopback" , true )
+                console.log("Virtual device removed")
                 module.manageDevice( "uvcvideo" , false )
+                console.log("Real device reloaded")
             }
         }
     }

@@ -12,19 +12,18 @@ FFMPEG::stream ( )
   arguments << "-re" << "-i" << m_vFileLocation;
   arguments << "-f" << "v4l2" << "/dev/video" + GlobalStorage::vDeviceID ;
 
-  qDebug() << "Writing to" << GlobalStorage::vDeviceID;
+  qDebug() << "Writing to device number" << GlobalStorage::vDeviceID;
 
   QProcess *callStream = new QProcess( );
   callStream->start( program, arguments );
-  
-  qDebug() << "callStream process started";
 }
 
 void
 FFMPEG::textFileGenerator ( QString tfileAddress, int loopMax )
 {
     m_tFileLocation = tfileAddress;
-    qDebug() << "textfileGenerator called with arguments" << tfileAddress << loopMax;
+    qDebug() << "textfileGenerator address set to" << tfileAddress;
+    qDebug() << "textfileGenerator loopCount set to"<< loopMax;
 
     QFile textFile ( tfileAddress );
     if (!textFile.open(QIODevice::ReadOnly | QIODevice::Text))
