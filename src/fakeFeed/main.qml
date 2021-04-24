@@ -33,6 +33,20 @@ Kirigami.ApplicationWindow {
         ffmpeg.fileInput( reqString );
     }
 
+    function manageFeed ( start )
+    {
+        module.manageDevice( "v4l2loopback" , !start )
+        if (start)
+        {
+            ffmpeg.textFileGenerator( "vtextfile.txt" , 100000 )
+            ffmpeg.stream()
+        }
+        else
+        {
+                console.log("halleluah")
+        }
+    }
+
     ColumnLayout {
         anchors.centerIn: parent
         Button {
@@ -53,13 +67,23 @@ Kirigami.ApplicationWindow {
             }
         }
         Button {
+            property var startMode : true;
             id : botton3
             enabled: false
-            text: "Start fake cam feed"
+            text : startMode ? "Start Cam feed" : "Stop Cam feed"
             onClicked: {
-                module.manageDevice( "v4l2loopback" , false )
-                ffmpeg.textFileGenerator( "~/vtextfile.txt" , 10 )
-                ffmpeg.stream()
+                manageFeed( startMode )
+                startMode =! startMode
+                botton4.enabled = true
+            }
+        }
+        Button {
+            id : botton4
+            enabled: false && botton4.startMode===true
+            text: "Enable original cam feed"
+            onClicked: {
+                module.manageDevice( "v4l2loopback" , true )
+                module.manageDevice( "uvcvideo" , false )
             }
         }
     }
