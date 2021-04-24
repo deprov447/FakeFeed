@@ -16,9 +16,13 @@ This list might be rendered incomplete in future due to development. There kindl
 # Build
 
 `$ git clone https://github.com/deprov447/fakefeed.git`
+
 `$ mkdir build && cd build`
+
 `$ cmake ..`
+
 `$ make -j$(nproc)`
+
 `$ sudo bin/FakeFeed`
 
 This assumes all dependencies are installed. Kindly build the dependencies yourself if your distribution does not provide them/have outdated versions.
